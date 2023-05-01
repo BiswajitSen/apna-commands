@@ -1,24 +1,28 @@
+const fs = require('fs');
+
 const {parse} = require('./parser.js');
-const pwd = function({environment}) {
-  return environment;
-};
+const {execute} = require('./codeRunner.js');
 
 const createEnvironment = function() {
   const environment = {
-    pwd: process.env.PWD,
+    PWD: process.env.PWD,
     oldPWD: process.env.olDPWD,
-    outputStream: [],
-    errorStream: []
+    outputRegister: [],
+    errorRegister: []
   };
 
   return environment;
 };
 
 const main = function() {
-  const sourceCode = process.argv[2];
+  const file = process.argv[2];
+  const sourceCode = fs.readFileSync(`./${file}`, 'utf-8');
   const commands = parse(sourceCode);
   let environment = createEnvironment();
 
+  console.log(execute(commands, environment));
 };
+
+main();
 
 exports.main = main;
