@@ -6,7 +6,7 @@ const parse = function(sourceCode) {
     commandLines.push({opCode, args});
 
     return commandLines;
-  }, [])
+  }, []);
 
 };
 
