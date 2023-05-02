@@ -20,7 +20,7 @@ const main = function() {
   const commands = parse(sourceCode);
   let environment = createEnvironment();
 
-  console.log(execute(commands, environment));
+  execute(commands, environment);
 };
 
 main();

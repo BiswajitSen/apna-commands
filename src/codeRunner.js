@@ -1,10 +1,14 @@
 const {pwd, ls, cd} = require('./commands.js');
-const opCodes = {pwd, ls, cd};
+
+const commandToExecute = function(opCode) {
+  const opCodes = {pwd, ls, cd};
+  return opCodes[opCode];
+}
 
 const execute = function(instructions, environment) {
   return instructions.reduce(function(environment, instruction){
     const {opCode, ...args} = instruction;
-    const currentInstruction = opCodes[opCode];
+    const currentInstruction = commandToExecute(opCode);
 
     return currentInstruction(environment, args);
   }, environment);
